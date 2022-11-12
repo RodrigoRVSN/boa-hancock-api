@@ -1,0 +1,18 @@
+version: '3.7'
+services:
+  database:
+    image: postgres
+    container_name: db_boa_hancock
+    restart: always
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_USER=boa-hancock
+      - POSTGRES_PASSWORD=boa-hancock
+    volumes:
+      - pgdata:/data/postgres
+
+volumes:
+  node_modules: {}
+  pgdata: 
+    driver: local
