@@ -78,10 +78,10 @@ ___
 ## 🤝 Contributors
 
 Made with ❤️ by:
-
 <table>
+<tbody>
   <tr>
-    <td align="center">
+  <td align="center">
       <a href="#">
         <img src="https://github.com/rodrigorvsn.png" width="100px;" alt="Foto do Rodrigo Victor no GitHub"/><br>
         <sub>
@@ -89,6 +89,19 @@ Made with ❤️ by:
         </sub>
       </a>
     </td>
-  </tr>
+  <td align="center">
+      <a href="#">
+        <img src="https://github.com/gustavoabel.png" width="100px;" alt="Foto do Gustavo Abel no GitHub"/><br>
+        <sub>
+          <b>Gustavo Abel</b>
+        </sub>
+      </a>
+    </td>
+    </tr>
+  </tbody>
 </table>
+
+
+
+
 
