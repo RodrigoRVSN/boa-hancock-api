@@ -1,73 +1,94 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo_text.svg" width="320" alt="Nest Logo" /></a>
-</p>
+# Boa Hancock Api
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+<!--- https://shields.io --->
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+![GitHub repo size](https://img.shields.io/github/repo-size/rodrigorvsn/boa-hancock-api?style=for-the-badge)
+![GitHub language count](https://img.shields.io/github/languages/count/rodrigorvsn/boa-hancock-api?style=for-the-badge)
+![GitHub forks](https://img.shields.io/github/forks/rodrigorvsn/boa-hancock-api?style=for-the-badge)
+![Bitbucket open issues](https://img.shields.io/bitbucket/issues/rodrigorvsn/boa-hancock-api?style=for-the-badge)
+![Bitbucket open pull requests](https://img.shields.io/bitbucket/pr-raw/rodrigorvsn/boa-hancock-api?style=for-the-badge)
 
-## Description
+___
+<!--- #################### mudar badges #################### --->
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
 
-## Installation
+<!--- #################### mudar imagem exemplo #################### --->
+___
+> This is the API for our Tinder application for Devs find their pair programming matched.
+___
+## 💻 Prerequisites
 
-```bash
-$ npm install
+- Install LTS Node version.
+- Fill the `.env` file, following the `.env.example`.
+
+<!--- #################### mudar pré-requisitos  ####################--->
+___
+## 🛠 Tools used
+
+- Typescript
+- <b>Nest</b>
+- Prisma ORM
+- Passport
+- JWT + Github OAuth Strategy
+
+<!--- #################### mudar ferramentas #################### --->
+
+___
+
+## 🚀 Installing boa-hancock-api
+
+#### Clone repository
+
+```powershell
+  git clone https://github.com/RodrigoRVSN/boa-hancock-api.git
 ```
 
-## Running the app
+#### Install dependencies
 
-```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
+```powershell
+  pnpm i
 ```
 
-## Test
+#### Run server
 
-```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+```powershell
+  pnpm start:dev
 ```
 
-## Support
+#### Open prisma studio to access and alter database
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+```powershell
+pnpm prisma studio
+```
 
-## Stay in touch
+___
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+## 📫 Contribuiting with boa-hancock-api
 
-## License
+To contribue with boa-hancock-api, follow the steps:
 
-Nest is [MIT licensed](LICENSE).
+1. Fork this repository.
+2. Create a branch: `git checkout -b <name_branch>`.
+3. Make the changes and confirm: `git commit -m '<message_commit>'`
+4. Send to original repository: `git push origin <main_branch> / <local>`
+5. Send the pull request.
+
+Alternatively, see the GitHub documentation at [how to create a pull request](https://help.github.com/en/github/collaborating-with-issues-and-pull-requests/creating-a-pull-request).
+___
+## 🤝 Contributors
+
+Made with ❤️ by:
+
+<table>
+  <tr>
+    <td align="center">
+      <a href="#">
+        <img src="https://github.com/rodrigorvsn.png" width="100px;" alt="Foto do Rodrigo Victor no GitHub"/><br>
+        <sub>
+          <b>Rodrigo Victor</b>
+        </sub>
+      </a>
+    </td>
+  </tr>
+</table>
+
