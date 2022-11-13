@@ -7,8 +7,17 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model Match {
+  id           String  @id @default(uuid())
+  from_user_id String
+  from_user    User    @relation(fields: [from_user_id], references: [id])
+  to_user_id   String
+  is_liked     Boolean
+  is_match     Boolean
+}
+
 model User {
-  id               Int      @unique @default(autoincrement())
+  id               String   @id @default(uuid())
   login            String
   avatar_url       String
   repos_url        String
@@ -22,4 +31,5 @@ model User {
   twitter_username String?
   created_at       DateTime @default(now()) @db.Timestamptz(6)
   updated_at       DateTime @default(now()) @updatedAt @db.Timestamptz(6)
+  matches          Match[]
 }

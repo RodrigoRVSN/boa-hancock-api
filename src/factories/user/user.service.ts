@@ -6,6 +6,18 @@ import { IGithubUser } from 'src/core/types/IGithubUser';
 export class UserService {
   constructor(private prisma: PrismaService) {}
 
+  async getUser(username: string) {
+    const userFound = await this.prisma.user.findFirst({
+      where: {
+        /*  login: {
+          not: username,
+        }, */
+      },
+    });
+
+    return userFound;
+  }
+
   async findByUsernameOrCreate(username: string, payload: { _raw: string }) {
     const user = await this.prisma.user.findFirst({
       where: {
@@ -13,11 +25,11 @@ export class UserService {
       },
     });
 
-    if (user) return;
+    if (user) return user.id;
 
     const userInfo: IGithubUser = JSON.parse(payload._raw);
 
-    await this.prisma.user.create({
+    const createdUser = await this.prisma.user.create({
       data: {
         avatar_url: userInfo.avatar_url,
         login: userInfo.login,
@@ -32,5 +44,7 @@ export class UserService {
         twitter_username: userInfo.twitter_username,
       },
     });
+
+    return createdUser.id;
   }
 }
