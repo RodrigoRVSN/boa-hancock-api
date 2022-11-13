@@ -6,10 +6,10 @@ import { IGithubUser } from 'src/core/types/IGithubUser';
 export class UserService {
   constructor(private prisma: PrismaService) {}
 
-  async findByIdOrCreate(id: number, payload: { _raw: string }) {
-    const user = await this.prisma.user.findUnique({
+  async findByUsernameOrCreate(username: string, payload: { _raw: string }) {
+    const user = await this.prisma.user.findFirst({
       where: {
-        id,
+        login: username,
       },
     });
 

@@ -16,7 +16,7 @@ export class GithubStrategy extends PassportStrategy(Strategy, 'github') {
   }
 
   async validate(accessToken: string, _refreshToken: string, profile: Profile) {
-    await this.userService.findByIdOrCreate(Number(profile.id), profile);
+    await this.userService.findByUsernameOrCreate(profile.username, profile);
 
     return profile;
   }
