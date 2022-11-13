@@ -8,16 +8,25 @@ datasource db {
 }
 
 model Match {
-  id           String  @id @default(uuid())
-  from_user_id String
-  from_user    User    @relation(fields: [from_user_id], references: [id])
-  to_user_id   String
-  is_liked     Boolean
-  is_match     Boolean
+  id              String   @id @unique @default(uuid())
+  user_id         String
+  matched_user_id String
+  matched_at      DateTime @default(now())
+
+  User User? @relation(fields: [user_id], references: [id])
+}
+
+model Like {
+  id         String  @id @unique @default(uuid())
+  user_id    String  @unique
+  to_user_id String
+  is_liked   Boolean
+
+  user User @relation(fields: [user_id], references: [id])
 }
 
 model User {
-  id               String   @id @default(uuid())
+  id               String   @id @unique @default(uuid())
   login            String
   avatar_url       String
   repos_url        String
@@ -31,5 +40,6 @@ model User {
   twitter_username String?
   created_at       DateTime @default(now()) @db.Timestamptz(6)
   updated_at       DateTime @default(now()) @updatedAt @db.Timestamptz(6)
+  likes            Like[]
   matches          Match[]
 }
