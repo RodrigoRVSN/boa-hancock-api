@@ -8,7 +8,7 @@ export class UserService {
   constructor(private prisma: PrismaService) {}
 
   async getRandomUser(username: string) {
-    const userFound = await this.prisma.user.findFirst({
+    return await this.prisma.user.findFirst({
       where: {
         login: { not: username },
         likes: {
@@ -18,8 +18,14 @@ export class UserService {
         },
       },
     });
+  }
 
-    return userFound;
+  async getUserById(userId: string) {
+    return await this.prisma.user.findFirst({
+      where: {
+        id: userId,
+      },
+    });
   }
 
   async findByUsernameOrCreate({ username, _raw }: Profile) {

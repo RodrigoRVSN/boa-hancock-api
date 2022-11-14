@@ -1,4 +1,4 @@
-import { Controller, Get, Req, UseGuards } from '@nestjs/common';
+import { Controller, Get, Param, Req, UseGuards } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { UserService } from './user.service';
@@ -13,6 +13,12 @@ export class UserController {
   @Get()
   getRandomUser(@Req() req) {
     return this.userService.getRandomUser(req.user.username);
+  }
+
+  @UseGuards(AuthGuard('jwt'))
+  @Get(':id')
+  getUserById(@Param('id') id: string) {
+    return this.userService.getUserById(id);
   }
 
   @UseGuards(AuthGuard('jwt'))
