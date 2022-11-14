@@ -6,18 +6,18 @@ on:
       - main
 
 jobs:
-  build:
+  install:
     runs-on: ubuntu-latest
 
-    install:
-      runs-on: ubuntu-latest
+    steps:
+      - uses: pnpm/action-setup@v2
+        with:
+          version: 7.15.0
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      steps:
-        - uses: pnpm/action-setup@v2
-          with:
-            version: 7.15.0
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  build:
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout repository
