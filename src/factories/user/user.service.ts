@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/core/recipes/prisma.service';
 import { IGithubUser } from 'src/core/types/IGithubUser';
+import { Profile } from 'passport-github';
 
 @Injectable()
 export class UserService {
@@ -58,7 +59,7 @@ export class UserService {
     return { is_match: false };
   }
 
-  async findByUsernameOrCreate(username: string, payload: { _raw: string }) {
+  async findByUsernameOrCreate({ username, _raw }: Profile) {
     const user = await this.prisma.user.findFirst({
       where: {
         login: username,
@@ -67,7 +68,7 @@ export class UserService {
 
     if (user) return user.id;
 
-    const userInfo: IGithubUser = JSON.parse(payload._raw);
+    const userInfo: IGithubUser = JSON.parse(_raw);
 
     const createdUser = await this.prisma.user.create({
       data: {
