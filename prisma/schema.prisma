@@ -14,8 +14,8 @@ model Match {
   matched_user_id String
   matched_at      DateTime @default(now())
 
-  User        User? @relation("matched", fields: [user_id], references: [id])
-  MatchedUser User? @relation("whoMatched", fields: [matched_user_id], references: [id])
+  user         User? @relation("matched", fields: [user_id], references: [id])
+  matched_user User? @relation("whoMatched", fields: [matched_user_id], references: [id])
 }
 
 model Like {

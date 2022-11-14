@@ -16,4 +16,19 @@ export class MatchesService {
 
     return usersMatched;
   }
+
+  async makeMatch(fromUserId: string, toUserId: string) {
+    return this.prisma.match.createMany({
+      data: [
+        {
+          user_id: fromUserId,
+          matched_user_id: toUserId,
+        },
+        {
+          matched_user_id: fromUserId,
+          user_id: toUserId,
+        },
+      ],
+    });
+  }
 }

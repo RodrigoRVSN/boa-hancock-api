@@ -1,9 +1,13 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/core/recipes/prisma.service';
+import { MatchesService } from '../matches/services/matches.service';
 
 @Injectable()
 export class LikesService {
-  constructor(private prisma: PrismaService) {}
+  constructor(
+    private prisma: PrismaService,
+    private matchesService: MatchesService,
+  ) {}
 
   async findLikeById(fromUserId: string, toUserId: string) {
     return this.prisma.like.findFirst({
@@ -34,18 +38,7 @@ export class LikesService {
       });
 
       if (hasFoundMatch) {
-        await this.prisma.match.createMany({
-          data: [
-            {
-              user_id: fromUserId,
-              matched_user_id: toUserId,
-            },
-            {
-              matched_user_id: fromUserId,
-              user_id: toUserId,
-            },
-          ],
-        });
+        await this.matchesService.makeMatch(fromUserId, toUserId);
 
         return { is_match: true };
       }
