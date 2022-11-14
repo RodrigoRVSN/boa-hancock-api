@@ -20,7 +20,8 @@ jobs:
         with:
           node-version: 17.6.0
       
-      - uses: pnpm/action-setup@v2
+      - name: 🚚 Setup pnpm
+        uses: pnpm/action-setup@v2
         with:
           version: 7.15.0
 
@@ -35,7 +36,7 @@ jobs:
 
       - name: 📦️ Install dependencies
         if: steps.pnpm-cache.outputs.cache-hit != 'true'
-        run: pnpm --frozen-lockfile
+        run: pnpm i
 
       - name: 👘 Run linter
         run: pnpm lint
