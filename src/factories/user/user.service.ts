@@ -6,12 +6,15 @@ import { IGithubUser } from 'src/core/types/IGithubUser';
 export class UserService {
   constructor(private prisma: PrismaService) {}
 
-  async getUser(username: string) {
+  async getRandomUser(username: string) {
     const userFound = await this.prisma.user.findFirst({
       where: {
-        /*  login: {
-          not: username,
-        }, */
+        login: { not: username },
+        likes: {
+          every: {
+            is_seen: false,
+          },
+        },
       },
     });
 
