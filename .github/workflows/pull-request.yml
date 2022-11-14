@@ -1,0 +1,53 @@
+name: ci
+
+on:
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - name: ⚙️ Setup node
+        uses: actions/setup-node@v1
+        with:
+          node-version: 17.6.0
+      
+      - name: 🚚 Setup pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 7.15.0
+
+      - name: 🧠 Cache node_modules
+        uses: actions/cache@v2
+        id: pnpm-cache
+        with:
+          path: '**/node_modules'
+          key: ${{ runner.os }}-pnpm-%{{ hashFiles('**/pnpm.lock.yaml')}}
+          restore-keys: /
+            ${{ runner.os }}-pnpm-
+
+      - name: 📦️ Install dependencies
+        if: steps.pnpm-cache.outputs.cache-hit != 'true'
+        run: pnpm i
+
+      - name: 👘 Run linter
+        run: pnpm lint
+
+      - name: 🧪 Run Jest Unit tests
+        run: pnpm test
+
+      - name: 🤖 Run Jest E2E tests
+        run: pnpm test:e2e
+
+
+      - name: 💬 Comment with Test Coverage
+        uses: dkershner6/jest-coverage-commenter-action@v1
+        with:
+          github_token: '${{ secrets.GITHUB_TOKEN }}'
+          test_command: 'pnpm test:cov'
