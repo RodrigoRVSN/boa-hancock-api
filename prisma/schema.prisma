@@ -21,12 +21,13 @@ model Like {
   user_id    String  @unique
   to_user_id String
   is_liked   Boolean
+  is_seen    Boolean @default(true)
 
   user User @relation(fields: [user_id], references: [id])
 }
 
 model User {
-  id               String   @id @unique @default(uuid())
+  id               String   @id @default(uuid())
   login            String
   avatar_url       String
   repos_url        String
