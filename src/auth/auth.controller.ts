@@ -1,8 +1,10 @@
 import { Controller, Get, Req, UseGuards } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { AuthGuard } from '@nestjs/passport';
+import { ApiTags } from '@nestjs/swagger';
 import { ICallback } from './auth.types';
 
+@ApiTags('Auth')
 @Controller('auth')
 export class AuthController {
   constructor(private jwtService: JwtService) {}
