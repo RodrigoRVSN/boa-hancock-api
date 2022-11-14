@@ -12,15 +12,15 @@ jobs:
         uses: actions/checkout@v2
         with:
           fetch-depth: 0
-      
-      - uses: pnpm/action-setup@v2
-        with:
-          version: 7.15.0
 
       - name: ⚙️ Setup node
         uses: actions/setup-node@v1
         with:
-          node-version: 12.18.x
+          node-version: 17.6.0
+      
+      - uses: pnpm/action-setup@v2
+        with:
+          version: 7.15.0
 
       - name: 🧠 Cache node_modules
         uses: actions/cache@v2
