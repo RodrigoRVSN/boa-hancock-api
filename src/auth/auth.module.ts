@@ -3,8 +3,8 @@ import { GithubStrategy, JwtStrategy } from './strategies';
 import { JwtModule } from '@nestjs/jwt';
 import { ConfigService } from '@nestjs/config';
 import { AuthController } from './auth.controller';
-import { UserService } from 'src/factories/user/user.service';
 import { PrismaService } from 'src/core/recipes/prisma.service';
+import { UserService } from 'src/factories/user/user.service';
 
 @Module({
   imports: [
