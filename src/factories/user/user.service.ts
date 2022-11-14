@@ -21,7 +21,11 @@ export class UserService {
     return userFound;
   }
 
-  async giveLike(fromUserId: string, toUserId: string, isLiked = false) {
+  async giveLikeOrDeslike(
+    fromUserId: string,
+    toUserId: string,
+    isLiked = false,
+  ) {
     await this.prisma.like.create({
       data: {
         user_id: fromUserId,
@@ -46,8 +50,12 @@ export class UserService {
             matched_user_id: toUserId,
           },
         });
+
+        return { is_match: true };
       }
     }
+
+    return { is_match: false };
   }
 
   async findByUsernameOrCreate(username: string, payload: { _raw: string }) {
