@@ -34,11 +34,17 @@ export class LikesService {
       });
 
       if (hasFoundMatch) {
-        await this.prisma.match.create({
-          data: {
-            user_id: fromUserId,
-            matched_user_id: toUserId,
-          },
+        await this.prisma.match.createMany({
+          data: [
+            {
+              user_id: fromUserId,
+              matched_user_id: toUserId,
+            },
+            {
+              matched_user_id: fromUserId,
+              user_id: toUserId,
+            },
+          ],
         });
 
         return { is_match: true };
