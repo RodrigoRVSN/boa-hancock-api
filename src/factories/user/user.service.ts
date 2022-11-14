@@ -1,23 +1,39 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/core/recipes/prisma.service';
 import { IGithubUser } from 'src/core/types/IGithubUser';
+import { Profile } from 'passport-github';
 
 @Injectable()
 export class UserService {
   constructor(private prisma: PrismaService) {}
 
-  async findByUsernameOrCreate(username: string, payload: { _raw: string }) {
+  async getRandomUser(username: string) {
+    const userFound = await this.prisma.user.findFirst({
+      where: {
+        login: { not: username },
+        likes: {
+          every: {
+            is_seen: false,
+          },
+        },
+      },
+    });
+
+    return userFound;
+  }
+
+  async findByUsernameOrCreate({ username, _raw }: Profile) {
     const user = await this.prisma.user.findFirst({
       where: {
         login: username,
       },
     });
 
-    if (user) return;
+    if (user) return user.id;
 
-    const userInfo: IGithubUser = JSON.parse(payload._raw);
+    const userInfo: IGithubUser = JSON.parse(_raw);
 
-    await this.prisma.user.create({
+    const createdUser = await this.prisma.user.create({
       data: {
         avatar_url: userInfo.avatar_url,
         login: userInfo.login,
@@ -32,5 +48,7 @@ export class UserService {
         twitter_username: userInfo.twitter_username,
       },
     });
+
+    return createdUser.id;
   }
 }

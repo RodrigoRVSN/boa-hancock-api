@@ -25,8 +25,6 @@ export interface IUser {
   hireable: boolean;
   bio: string;
   twitter_username: string;
-  public_repos: number;
-  public_gists: number;
   followers: number;
   following: number;
   created_at: Date;
