@@ -1,15 +1,27 @@
-import { Module } from '@nestjs/common';
+import { CacheInterceptor, CacheModule, Module } from '@nestjs/common';
 import { AuthModule } from './auth/auth.module';
-import { ConfigModule } from '@nestjs/config';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 import { factoriesModules } from './factories';
+import { APP_INTERCEPTOR } from '@nestjs/core';
+import * as redisStore from 'cache-manager-redis-store';
 
+const configService = new ConfigService();
 @Module({
   imports: [
     AuthModule,
     ...factoriesModules,
     ConfigModule.forRoot({ isGlobal: true }),
+    CacheModule.register({
+      isGlobal: true,
+      // @ts-ignore
+      store: redisStore,
+      socket: {
+        host: configService.get('REDIS_URL'),
+        port: 6379,
+      },
+    }),
   ],
   controllers: [],
-  providers: [],
+  providers: [{ provide: APP_INTERCEPTOR, useClass: CacheInterceptor }],
 })
 export class AppModule {}

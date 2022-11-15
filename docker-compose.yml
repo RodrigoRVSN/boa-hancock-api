@@ -1,8 +1,8 @@
 version: '3.7'
 services:
   database:
-    image: postgres
     container_name: db_boa_hancock
+    image: postgres
     restart: always
     ports:
       - 5432:5432
@@ -12,7 +12,19 @@ services:
     volumes:
       - pgdata:/data/postgres
 
+  cache:
+    container_name: redis_boa_hancock
+    image: redis:6.2-alpine
+    restart: always
+    ports:
+      - '6379:6379'
+    command: redis-server --save 20 1 --loglevel warning
+    volumes: 
+      - cache:/data/redis
+
 volumes:
   node_modules: {}
   pgdata: 
+    driver: local
+  cache: 
     driver: local
