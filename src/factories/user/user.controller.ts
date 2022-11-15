@@ -1,4 +1,12 @@
-import { Controller, Get, Param, Req, UseGuards } from '@nestjs/common';
+import {
+  CacheInterceptor,
+  Controller,
+  Get,
+  Param,
+  Req,
+  UseGuards,
+  UseInterceptors,
+} from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { UserService } from './user.service';
@@ -6,6 +14,7 @@ import { UserService } from './user.service';
 @ApiBearerAuth()
 @ApiTags('User')
 @Controller('user')
+@UseInterceptors(CacheInterceptor)
 export class UserController {
   constructor(private userService: UserService) {}
 
