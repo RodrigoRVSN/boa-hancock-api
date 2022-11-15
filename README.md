@@ -1,15 +1,6 @@
 # Boa Hancock Api
 
-<!--- https://shields.io --->
-
-![GitHub repo size](https://img.shields.io/github/repo-size/rodrigorvsn/boa-hancock-api?style=for-the-badge)
-![GitHub language count](https://img.shields.io/github/languages/count/rodrigorvsn/boa-hancock-api?style=for-the-badge)
-![GitHub forks](https://img.shields.io/github/forks/rodrigorvsn/boa-hancock-api?style=for-the-badge)
-![Bitbucket open issues](https://img.shields.io/bitbucket/issues/rodrigorvsn/boa-hancock-api?style=for-the-badge)
-![Bitbucket open pull requests](https://img.shields.io/bitbucket/pr-raw/rodrigorvsn/boa-hancock-api?style=for-the-badge)
-
-___
-<!--- #################### mudar badges #################### --->
+![image](https://user-images.githubusercontent.com/75763403/202018120-b5cccba4-5509-4a97-9f9a-3c401fa47127.png)
 
 
 <!--- #################### mudar imagem exemplo #################### --->
@@ -30,6 +21,9 @@ ___
 - Prisma ORM
 - Passport
 - JWT + Github OAuth Strategy
+- Redis cache
+- Swagger documentation
+- Socket.io websockets
 
 <!--- #################### mudar ferramentas #################### --->
 
@@ -74,7 +68,21 @@ To contribue with boa-hancock-api, follow the steps:
 5. Send the pull request.
 
 Alternatively, see the GitHub documentation at [how to create a pull request](https://help.github.com/en/github/collaborating-with-issues-and-pull-requests/creating-a-pull-request).
+
 ___
+
+<!--- https://shields.io --->
+
+![GitHub repo size](https://img.shields.io/github/repo-size/rodrigorvsn/boa-hancock-api?style=for-the-badge)
+![GitHub language count](https://img.shields.io/github/languages/count/rodrigorvsn/boa-hancock-api?style=for-the-badge)
+![GitHub forks](https://img.shields.io/github/forks/rodrigorvsn/boa-hancock-api?style=for-the-badge)
+![Bitbucket open issues](https://img.shields.io/bitbucket/issues/rodrigorvsn/boa-hancock-api?style=for-the-badge)
+![Bitbucket open pull requests](https://img.shields.io/bitbucket/pr-raw/rodrigorvsn/boa-hancock-api?style=for-the-badge)
+
+<!--- #################### mudar badges #################### --->
+
+___
+
 ## 🤝 Contributors
 
 Made with ❤️ by:
@@ -100,8 +108,5 @@ Made with ❤️ by:
     </tr>
   </tbody>
 </table>
-
-
-
 
 
