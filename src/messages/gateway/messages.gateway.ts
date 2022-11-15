@@ -2,19 +2,24 @@ import {
   SubscribeMessage,
   WebSocketGateway,
   MessageBody,
+  WebSocketServer,
 } from '@nestjs/websockets';
 import { SendMessageDto } from '../dtos/SendMessageDto';
 import { MessagesService } from '../services/messages.service';
+import { Server } from 'socket.io';
 
 @WebSocketGateway({ cors: true })
 export class MessagesGateway {
+  @WebSocketServer()
+  server: Server;
+
   constructor(private messagesService: MessagesService) {}
 
-  @SubscribeMessage('message')
+  @SubscribeMessage('sendMessage')
   async handleMessage(@MessageBody() messageData: SendMessageDto) {
     const message = await this.messagesService.saveMessage(messageData);
 
-    console.log({ messageData, message });
+    this.server.emit('receivedMessage', message);
 
     return message;
   }
