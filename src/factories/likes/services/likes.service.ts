@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/core/recipes/prisma.service';
-import { MatchesService } from '../matches/services/matches.service';
+import { MatchesService } from 'src/factories/matches/services/matches.service';
 
 @Injectable()
 export class LikesService {

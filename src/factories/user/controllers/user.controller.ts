@@ -2,6 +2,7 @@ import {
   CacheInterceptor,
   Controller,
   Get,
+  NotFoundException,
   Param,
   Req,
   UseGuards,
@@ -9,7 +10,7 @@ import {
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
-import { UserService } from './user.service';
+import { UserService } from '../services/user.service';
 
 @ApiBearerAuth()
 @ApiTags('User')
@@ -21,13 +22,25 @@ export class UserController {
   @UseGuards(AuthGuard('jwt'))
   @Get()
   getRandomUser(@Req() req) {
-    return this.userService.getRandomUser(req.user.username);
+    const randomUser = this.userService.getRandomUser(req.user.username);
+
+    if (!randomUser) {
+      throw new NotFoundException();
+    }
+
+    return randomUser;
   }
 
   @UseGuards(AuthGuard('jwt'))
   @Get(':id')
-  getUserById(@Param('id') id: string) {
-    return this.userService.getUserById(id);
+  async getUserById(@Param('id') id: string) {
+    const userFound = await this.userService.getUserById(id);
+
+    if (!userFound) {
+      throw new NotFoundException();
+    }
+
+    return userFound;
   }
 
   @UseGuards(AuthGuard('jwt'))
