@@ -8,8 +8,8 @@ import {
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
-import { GiveLikeOrDeslikeDto } from './dtos/GiveLikeOrDeslikeDto';
-import { LikesService } from './likes.service';
+import { GiveLikeOrDeslikeDto } from '../dtos/GiveLikeOrDeslikeDto';
+import { LikesService } from '../services/likes.service';
 
 @ApiBearerAuth()
 @ApiTags('Likes')
