@@ -12,7 +12,6 @@ export class MessagesGateway {
 
   @SubscribeMessage('message')
   async handleMessage(@MessageBody() messageData: SendMessageDto) {
-    console.log(messageData);
     await this.messagesService.saveMessage(messageData);
   }
 }

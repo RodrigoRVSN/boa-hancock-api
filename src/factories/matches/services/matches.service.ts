@@ -31,4 +31,21 @@ export class MatchesService {
       ],
     });
   }
+
+  async getMatchIdFromMatchedUser(match_id: string) {
+    const matched = await this.prisma.match.findFirst({
+      where: {
+        id: match_id,
+      },
+      select: { matched_user_id: true },
+    });
+
+    const matchIdByMatchedUserId = await this.prisma.match.findFirst({
+      where: {
+        user_id: matched.matched_user_id,
+      },
+    });
+
+    return matchIdByMatchedUserId.id;
+  }
 }
