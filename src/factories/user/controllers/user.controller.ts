@@ -21,8 +21,8 @@ export class UserController {
 
   @UseGuards(AuthGuard('jwt'))
   @Get()
-  getRandomUser(@Req() req) {
-    const randomUser = this.userService.getRandomUser(req.user.username);
+  async getRandomUser(@Req() req) {
+    const randomUser = await this.userService.getRandomUser(req.user.username);
 
     if (!randomUser) {
       throw new NotFoundException();
