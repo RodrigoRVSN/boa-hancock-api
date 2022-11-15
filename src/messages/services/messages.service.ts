@@ -31,4 +31,15 @@ export class MessagesService {
       data: { is_seen: true },
     });
   }
+
+  async getMessagesByMatchId(matchId: string) {
+    return await this.prisma.message.findMany({
+      where: {
+        match_id: matchId,
+      },
+      include: {
+        match: true,
+      },
+    });
+  }
 }

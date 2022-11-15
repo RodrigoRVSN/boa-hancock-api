@@ -11,7 +11,7 @@ export class MatchesService {
         user_id: userId,
       },
       orderBy: { matched_at: 'desc' },
-      include: { matched_user: true },
+      include: { matched_user: true, messages: { where: { is_seen: false } } },
     });
 
     return usersMatched;
