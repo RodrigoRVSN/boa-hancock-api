@@ -28,7 +28,7 @@ export class MessagesService {
         match_id: matchId,
       },
       include: {
-        match: { include: { matched_user: true } },
+        match: true,
       },
     });
   }

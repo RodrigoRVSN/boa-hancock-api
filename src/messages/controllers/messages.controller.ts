@@ -2,7 +2,6 @@ import {
   CacheInterceptor,
   Controller,
   Get,
-  NotFoundException,
   Param,
   UseGuards,
   UseInterceptors,
@@ -22,10 +21,6 @@ export class MessagesController {
   @Get(':matchId')
   async getMessagesFromMatch(@Param('matchId') matchId: string) {
     const messages = await this.messagesService.getMessagesByMatchId(matchId);
-
-    if (!messages) {
-      throw new NotFoundException();
-    }
 
     return messages;
   }
