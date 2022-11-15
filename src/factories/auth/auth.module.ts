@@ -4,7 +4,7 @@ import { JwtModule } from '@nestjs/jwt';
 import { ConfigService } from '@nestjs/config';
 import { AuthController } from './auth.controller';
 import { PrismaService } from 'src/core/recipes/prisma.service';
-import { UserService } from 'src/factories/user/user.service';
+import { UserService } from 'src/factories/user/services/user.service';
 
 @Module({
   imports: [
