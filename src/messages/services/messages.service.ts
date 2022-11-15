@@ -15,13 +15,20 @@ export class MessagesService {
       await this.matchesService.getMatchIdFromMatchedUser(match_id);
 
     const createdMessages = await this.prisma.$transaction(
-      [match_id, matchedUserMatchId].map((matchId) =>
+      [match_id, matchedUserMatchId].map((matchId, index) =>
         this.prisma.message.create({
-          data: { match_id: matchId, text, sender_id },
+          data: { is_seen: index === 0, match_id: matchId, text, sender_id },
         }),
       ),
     );
 
     return createdMessages[0];
+  }
+
+  seeMessages(match_id: string) {
+    return this.prisma.message.updateMany({
+      where: { match_id, is_seen: false },
+      data: { is_seen: true },
+    });
   }
 }

@@ -24,6 +24,11 @@ export class MessagesGateway {
     return message;
   }
 
+  @SubscribeMessage('seenMessages')
+  async handleSeeMessages(@MessageBody() matchId: string) {
+    return this.messagesService.seeMessages(matchId);
+  }
+
   @SubscribeMessage('typing')
   async handleTyping(@MessageBody() nameOfWhoIsTyping: string) {
     this.server.emit('typing', { name: nameOfWhoIsTyping });
