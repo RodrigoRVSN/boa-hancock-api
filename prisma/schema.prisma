@@ -14,6 +14,7 @@ model Message {
   created_at DateTime @default(now()) @db.Timestamptz(6)
   updated_at DateTime @default(now()) @updatedAt @db.Timestamptz(6)
   match_id   String
+  sender_id  String
 
   match Match? @relation(fields: [match_id], references: [id])
 }

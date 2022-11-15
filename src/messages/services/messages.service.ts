@@ -10,26 +10,24 @@ export class MessagesService {
     private matchesService: MatchesService,
   ) {}
 
-  async saveMessage({ match_id, text }: SendMessageDto) {
+  async saveMessage({ match_id, text, sender_id }: SendMessageDto) {
     const matchedUserMatchId =
       await this.matchesService.getMatchIdFromMatchedUser(match_id);
 
-    return await this.prisma.message.createMany({
-      data: [
-        { match_id, text },
-        { match_id: matchedUserMatchId, text },
-      ],
-    });
+    const createdMessages = await this.prisma.$transaction(
+      [match_id, matchedUserMatchId].map((matchId) =>
+        this.prisma.message.create({
+          data: { match_id: matchId, text, sender_id },
+        }),
+      ),
+    );
+
+    return createdMessages[0];
   }
 
   async getMessagesByMatchId(matchId: string) {
     return await this.prisma.message.findMany({
-      where: {
-        match_id: matchId,
-      },
-      include: {
-        match: true,
-      },
+      where: { match_id: matchId },
     });
   }
 }

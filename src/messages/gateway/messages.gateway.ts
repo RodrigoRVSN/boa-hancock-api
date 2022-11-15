@@ -12,6 +12,10 @@ export class MessagesGateway {
 
   @SubscribeMessage('message')
   async handleMessage(@MessageBody() messageData: SendMessageDto) {
-    await this.messagesService.saveMessage(messageData);
+    const message = await this.messagesService.saveMessage(messageData);
+
+    console.log({ messageData, message });
+
+    return message;
   }
 }
