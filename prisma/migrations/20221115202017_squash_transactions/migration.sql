@@ -1,4 +1,15 @@
 -- CreateTable
+CREATE TABLE "Message" (
+    "id" TEXT NOT NULL,
+    "text" TEXT NOT NULL,
+    "created_at" TIMESTAMPTZ(6) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updated_at" TIMESTAMPTZ(6) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "match_id" TEXT NOT NULL,
+    "sender_id" TEXT NOT NULL,
+    "is_seen" BOOLEAN NOT NULL DEFAULT false
+);
+
+-- CreateTable
 CREATE TABLE "Match" (
     "id" TEXT NOT NULL,
     "user_id" TEXT NOT NULL,
@@ -14,6 +25,7 @@ CREATE TABLE "Like" (
     "user_id" TEXT NOT NULL,
     "to_user_id" TEXT NOT NULL,
     "is_liked" BOOLEAN NOT NULL,
+    "is_seen" BOOLEAN NOT NULL DEFAULT true,
 
     CONSTRAINT "Like_pkey" PRIMARY KEY ("id")
 );
@@ -39,19 +51,19 @@ CREATE TABLE "User" (
 );
 
 -- CreateIndex
+CREATE UNIQUE INDEX "Message_id_key" ON "Message"("id");
+
+-- CreateIndex
 CREATE UNIQUE INDEX "Match_id_key" ON "Match"("id");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "Like_id_key" ON "Like"("id");
 
--- CreateIndex
-CREATE UNIQUE INDEX "Like_user_id_key" ON "Like"("user_id");
-
--- CreateIndex
-CREATE UNIQUE INDEX "User_id_key" ON "User"("id");
+-- AddForeignKey
+ALTER TABLE "Message" ADD CONSTRAINT "Message_match_id_fkey" FOREIGN KEY ("match_id") REFERENCES "Match"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "Match" ADD CONSTRAINT "Match_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "Match" ADD CONSTRAINT "Match_matched_user_id_fkey" FOREIGN KEY ("matched_user_id") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "Like" ADD CONSTRAINT "Like_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
