@@ -8,14 +8,24 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model Message {
+  id         String   @unique @default(uuid())
+  text       String
+  created_at DateTime @default(now()) @db.Timestamptz(6)
+  updated_at DateTime @default(now()) @updatedAt @db.Timestamptz(6)
+  match_id   String
+
+  match Match? @relation(fields: [match_id], references: [id])
+}
+
 model Match {
   id              String   @id @unique @default(uuid())
   user_id         String
   matched_user_id String
   matched_at      DateTime @default(now())
 
-  user         User? @relation("matched", fields: [user_id], references: [id])
-  matched_user User? @relation("whoMatched", fields: [matched_user_id], references: [id])
+  matched_user User?     @relation("whoMatched", fields: [matched_user_id], references: [id])
+  messages     Message[]
 }
 
 model Like {
@@ -44,6 +54,5 @@ model User {
   created_at       DateTime @default(now()) @db.Timestamptz(6)
   updated_at       DateTime @default(now()) @updatedAt @db.Timestamptz(6)
   likes            Like[]
-  matches          Match[]  @relation("matched")
   who_matched      Match[]  @relation("whoMatched")
 }
