@@ -23,4 +23,9 @@ export class MessagesGateway {
 
     return message;
   }
+
+  @SubscribeMessage('typing')
+  async handleTyping(@MessageBody() nameOfWhoIsTyping: string) {
+    this.server.emit('typing', { name: nameOfWhoIsTyping });
+  }
 }

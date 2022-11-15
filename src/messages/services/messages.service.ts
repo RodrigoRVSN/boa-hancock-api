@@ -24,10 +24,4 @@ export class MessagesService {
 
     return createdMessages[0];
   }
-
-  async getMessagesByMatchId(matchId: string) {
-    return await this.prisma.message.findMany({
-      where: { match_id: matchId },
-    });
-  }
 }
