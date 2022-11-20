@@ -20,6 +20,14 @@ export class UserController {
   constructor(private userService: UserService) {}
 
   @UseGuards(AuthGuard('jwt'))
+  @Get('profile')
+  async getProfile(@Req() req) {
+    const userFound = await this.userService.getUserById(req.user.id);
+
+    return userFound;
+  }
+
+  @UseGuards(AuthGuard('jwt'))
   @Get()
   async getRandomUser(@Req() req) {
     const randomUser = await this.userService.getRandomUser(req.user.username);
@@ -41,12 +49,5 @@ export class UserController {
     }
 
     return userFound;
-  }
-
-  @UseGuards(AuthGuard('jwt'))
-  @Get('profile')
-  getProfile(@Req() req) {
-    // TODO: use this route to return the user info in personal profile
-    return req.user;
   }
 }
