@@ -1,4 +1,4 @@
-import { MessagesModule } from 'src/messages/messages.module';
+import { MessagesModule } from './messages/messages.module';
 import { AuthModule } from './auth/auth.module';
 import { LikesModule } from './likes/likes.module';
 import { MatchesModule } from './matches/user.module';
