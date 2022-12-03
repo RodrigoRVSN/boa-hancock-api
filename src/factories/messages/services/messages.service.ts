@@ -46,6 +46,6 @@ export class MessagesService {
       matchId,
     );
 
-    return { matchedUser, messages };
+    return { ...matchedUser, messages };
   }
 }
