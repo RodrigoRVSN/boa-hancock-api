@@ -39,7 +39,6 @@ export class MatchesService {
       },
       select: { matched_user_id: true },
     });
-
     const matchIdByMatchedUserId = await this.prisma.match.findFirst({
       where: {
         user_id: matched.matched_user_id,
@@ -47,5 +46,12 @@ export class MatchesService {
     });
 
     return matchIdByMatchedUserId.id;
+  }
+
+  getMatchedUserByMatchId(matchId: string) {
+    return this.prisma.match.findFirst({
+      where: { id: matchId },
+      include: { matched_user: true },
+    });
   }
 }

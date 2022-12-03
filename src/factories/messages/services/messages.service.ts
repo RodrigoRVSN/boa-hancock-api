@@ -33,7 +33,7 @@ export class MessagesService {
   }
 
   async getMessagesByMatchId(matchId: string) {
-    return await this.prisma.message.findMany({
+    const messages = await this.prisma.message.findMany({
       where: {
         match_id: matchId,
       },
@@ -41,5 +41,11 @@ export class MessagesService {
         match: true,
       },
     });
+
+    const matchedUser = await this.matchesService.getMatchedUserByMatchId(
+      matchId,
+    );
+
+    return { matchedUser, messages };
   }
 }
