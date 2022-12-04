@@ -8,13 +8,16 @@ export class UserService {
   constructor(private prisma: PrismaService) {}
 
   async getRandomUser(username: string) {
-    return await this.prisma.user.findFirst({
+    const usersLiked = await this.prisma.user.findFirst({
+      where: { login: username },
+      select: { likes: true },
+    });
+
+    return this.prisma.user.findFirst({
       where: {
         login: { not: username },
-        likes: {
-          every: {
-            is_seen: false,
-          },
+        id: {
+          notIn: usersLiked.likes.map(({ to_user_id }) => to_user_id),
         },
       },
     });
