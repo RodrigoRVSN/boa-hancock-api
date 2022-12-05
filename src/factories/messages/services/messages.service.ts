@@ -12,7 +12,7 @@ export class MessagesService {
 
   async saveMessage({ match_id, text, sender_id }: SendMessageDto) {
     const matchedUserMatchId =
-      await this.matchesService.getMatchIdFromMatchedUser(match_id);
+      await this.matchesService.getMatchIdFromMatchedUser(match_id, sender_id);
 
     const createdMessages = await this.prisma.$transaction(
       [match_id, matchedUserMatchId].map((matchId, index) =>
