@@ -18,18 +18,20 @@ export class MatchesService {
   }
 
   async makeMatch(fromUserId: string, toUserId: string) {
-    return this.prisma.match.createMany({
-      data: [
-        {
+    return this.prisma.$transaction([
+      this.prisma.match.create({
+        data: {
           user_id: fromUserId,
           matched_user_id: toUserId,
         },
-        {
-          matched_user_id: fromUserId,
+      }),
+      this.prisma.match.create({
+        data: {
           user_id: toUserId,
+          matched_user_id: fromUserId,
         },
-      ],
-    });
+      }),
+    ]);
   }
 
   async getMatchIdFromMatchedUser(match_id: string) {

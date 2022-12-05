@@ -38,9 +38,9 @@ export class LikesService {
       });
 
       if (hasFoundMatch) {
-        await this.matchesService.makeMatch(fromUserId, toUserId);
+        const match = await this.matchesService.makeMatch(fromUserId, toUserId);
 
-        return { is_match: true };
+        return { is_match: true, match_id: match[0].id };
       }
     }
 
