@@ -3,12 +3,15 @@ import { JwtService } from '@nestjs/jwt';
 import { AuthGuard } from '@nestjs/passport';
 import { ApiTags } from '@nestjs/swagger';
 import { ICallback } from './auth.types';
-import {ConfigService} from "@nestjs/config";
+import { ConfigService } from '@nestjs/config';
 
 @ApiTags('Auth')
 @Controller('auth')
 export class AuthController {
-  constructor(private jwtService: JwtService, private configService: ConfigService) {}
+  constructor(
+    private jwtService: JwtService,
+    private configService: ConfigService,
+  ) {}
 
   @Get()
   @UseGuards(AuthGuard('github'))
@@ -19,7 +22,7 @@ export class AuthController {
   async authCallback(@Req() { user }: ICallback, @Res() res) {
     const payload = { sub: user.id, username: user.username };
 
-    const accessToken = this.jwtService.sign(payload)
+    const accessToken = this.jwtService.sign(payload);
 
     res.cookie('@bh_access_token', accessToken, {
       maxAge: 2592000000,
@@ -27,7 +30,7 @@ export class AuthController {
       secure: false,
     });
 
-    res.redirect(this.configService.get('CLIENT_URL'))
+    res.redirect(this.configService.get('CLIENT_URL'));
 
     return { accessToken };
   }
