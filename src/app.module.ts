@@ -14,9 +14,7 @@ const configService = new ConfigService();
       // @ts-ignore
       store: redisStore,
 
-      host: configService.get('REDIS_URL'),
-
-      port: configService.get('REDIS_PORT') || 6379,
+      url: configService.get('REDIS_URL'),
     }),
   ],
   controllers: [],
