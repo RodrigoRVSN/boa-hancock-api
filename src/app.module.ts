@@ -13,10 +13,10 @@ const configService = new ConfigService();
       isGlobal: true,
       // @ts-ignore
       store: redisStore,
-      socket: {
-        host: configService.get('REDIS_URL'),
-        port: 6379,
-      },
+
+      host: configService.get('REDIS_URL'),
+
+      port: configService.get('REDIS_PORT') || 6379,
     }),
   ],
   controllers: [],

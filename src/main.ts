@@ -4,6 +4,7 @@ import { swaggerConfig } from './core/recipes/swagger.config';
 
 async function bootstrap() {
   const PORT = process.env.PORT || 4444;
+  console.log({ PORT });
 
   const app = await NestFactory.create(AppModule);
 
