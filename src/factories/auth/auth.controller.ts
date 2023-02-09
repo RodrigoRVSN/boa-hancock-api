@@ -24,13 +24,9 @@ export class AuthController {
 
     const accessToken = this.jwtService.sign(payload);
 
-    res.cookie('@bh_access_token', accessToken, {
-      maxAge: 2592000000,
-      sameSite: true,
-      secure: false,
-    });
-
-    res.redirect(this.configService.get('CLIENT_URL'));
+    res.redirect(
+      `${this.configService.get('CLIENT_URL')}?token=${accessToken}`,
+    );
 
     return { accessToken };
   }
